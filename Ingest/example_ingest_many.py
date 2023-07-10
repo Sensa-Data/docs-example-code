@@ -49,8 +49,7 @@ def read_data_from_file(path: str):
         yield json.dumps({"db": db,"data": records})
 
 async def write_data(client: httpx.AsyncClient, data) -> httpx.Response:
-    #url = "https://api.sensadata.io/ingest/ingest_many"
-    url = "http://localhost:8000/ingest/ingest_many"
+    url = "https://api.sensadata.io/ingest/ingest_many"
     response = await client.post(url, data=data) 
     return response
 
