@@ -10,16 +10,17 @@ load_dotenv()
 
 MAX_RECORDS_PER_REQUEST = 1000
 
-def read_data_from_file(path: str):
-    db = {
-            "customer_id": os.getenv("ORG"),
-            "key": os.getenv("KEY"),
-            "bucket": os.getenv("BUCKET")
-    }
+DB = {
+        "customer_id": os.getenv("ORG"),
+        "key": os.getenv("KEY"),
+        "bucket": os.getenv("BUCKET")
+}
 
+def read_data_from_file(path: str):
     with open(path, "r") as file:
         records = []
         reader = csv.DictReader(file)
+        idx = 0
         for idx, row in enumerate(reader):
 
             records.append({
@@ -42,11 +43,11 @@ def read_data_from_file(path: str):
             })
 
             if (idx+1) % MAX_RECORDS_PER_REQUEST == 0:
-                yield json.dumps({"db": db,"data": records})
+                yield json.dumps({"db": DB,"data": records})
                 records = []
 
     if (idx+1) % MAX_RECORDS_PER_REQUEST != 0 and len(records) > 0:
-        yield json.dumps({"db": db,"data": records})
+        yield json.dumps({"db": DB, "data": records})
 
 async def write_data(client: httpx.AsyncClient, data) -> httpx.Response:
     url = "https://api.sensadata.io/ingest/ingest_many"
