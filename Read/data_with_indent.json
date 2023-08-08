@@ -1,0 +1,50 @@
+{
+    "iox::measurement": [
+        "Weather_Station_OSLO",
+        "Weather_Station_OSLO",
+        "Weather_Station_OSLO",
+        "Weather_Station_OSLO",
+        "Weather_Station_OSLO",
+        "Weather_Station_OSLO",
+        "Weather_Station_OSLO",
+        "Weather_Station_OSLO",
+        "Weather_Station_OSLO",
+        "Weather_Station_OSLO"
+    ],
+    "time": [
+        "2023-08-08 06:22:54.007268",
+        "2023-08-08 06:22:54.007280",
+        "2023-08-08 06:22:54.007285",
+        "2023-08-08 06:22:54.007289",
+        "2023-08-08 06:22:54.007293",
+        "2023-08-08 06:22:54.007297",
+        "2023-08-08 06:22:54.007301",
+        "2023-08-08 06:22:54.007309",
+        "2023-08-08 06:22:54.007313",
+        "2023-08-08 06:22:54.007317"
+    ],
+    "value": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+    ],
+    "unit": [
+        "mm",
+        "mm",
+        "mm",
+        "mm",
+        "mm",
+        "mm",
+        "mm",
+        "mm",
+        "mm",
+        "mm"
+    ]
+}
