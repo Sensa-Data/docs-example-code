@@ -1,5 +1,4 @@
-import sys
-print(sys.path)
+
 import os
 import csv
 import json
@@ -14,10 +13,10 @@ MAX_RECORDS_PER_REQUEST = 1000
 
 DB = {
         "customer_id": os.getenv("ORG"),
-        "key": os.getenv("KEY"),
+        "key": os.getenv("INFLUX_KEY"),
         "bucket": os.getenv("BUCKET")
 }
-
+print(DB)
 def read_data_from_file(path: str):
     print(datetime.utcnow())
     with open(path, "r") as file:
@@ -29,18 +28,17 @@ def read_data_from_file(path: str):
             records.append({
                 "system": "Production_events",
                 "tags": {
-                    "Unit": "Building D",
+                    "unit": "Building D",
                     "section": "18A",
                     "equipment": "Biomass",
                     "subunit": "FishTank",
-                    "batchid": row["sourceId"]
+                    "id": row["sourceId"]
                 },
                 "fields": [
                     {
                         "value": row["value"],
                         "name": "Precipitation_Sum",
-                        "unit": row["unit"],
-                        "description": "Dette er en test"
+                        "unit": row["unit"]
                     }
                     ],
                 "time": str(datetime.utcnow())
@@ -54,9 +52,8 @@ def read_data_from_file(path: str):
         yield json.dumps({"db": DB, "data": records})
 
 async def write_data(client: httpx.AsyncClient, data) -> httpx.Response:
-    url = "https://api.sensadata.io/ingest/ingest"
+    url = "https://api.sensadata.io/ingest/"
     response = await client.post(url, data=data) 
-    print(response.status_code, response.content)
     return response
 
 async def ingest():
